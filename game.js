@@ -10,7 +10,7 @@ var board = [
 ]
 
 var createBoard = function() {
-
+  // create board of N sizes
 }
 
 var checkWon = function(board, player) {
@@ -30,8 +30,8 @@ var checkWon = function(board, player) {
   // check vertical
   for (var i = 0; i < board[0].length; i++) {
     var gameWon = true;
-    for (var j = 1; j < board.length; j++) {
-      if (board[i][j] !== player) {
+    for (var j = 0; j < board.length; j++) {
+      if (board[j][i] !== player) {
         gameWon = false;
       }
     }
@@ -41,6 +41,18 @@ var checkWon = function(board, player) {
   }
 
   // check horizontal
+  var j = 0;
+  var gameWon = true;
+  for (var i = 0; i < board.length; i++) {
+    console.log(i, j);
+    if (board[i][j] !== player) {
+      gameWon = false;
+    }
+    j++;
+  }
+  if (gameWon) {
+    return true;
+  }
 }
 
 var game = function() {
@@ -50,12 +62,13 @@ var game = function() {
   var currentPlayer = 'X';
 
   while (gameWon === false) {
-    console.log(board);
-
-    console.log('Input coordinates of next move')
     // move piece to input coordinates
+    console.log('Input coordinates of next move')
+
     // check if current player wins
-    checkWon(board, currentPlayer);
+    if (checkWon(board, currentPlayer)) {
+      console.log(currentPlayer + 'Wins')
+    };
     // switch player
     if (currentPlayer === 'O') {
       currentPlayer = 'X';
@@ -64,7 +77,7 @@ var game = function() {
     }
     gameWon = true;
   }
-
 }
 
+// start game
 game();
